@@ -1,722 +1,305 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+import React, { useState, useEffect } from 'react';
+import { Wind, Mountain, Scroll, BookOpen, Flower2, Menu, X, ChevronRight, Moon, Sun } from 'lucide-react';
+
+// 模拟数据：二十四节气精选
+const solarTerms = [
+  { name: '立春', en: 'Start of Spring', desc: '东风解冻，蛰虫始振。', color: 'bg-green-100 text-green-900', img: 'https://images.unsplash.com/photo-1518264062027-097a7e31188e?auto=format&fit=crop&q=80&w=600' },
+  { name: '雨水', en: 'Rain Water', desc: '鸿雁来，草木萌动。', color: 'bg-blue-50 text-blue-900', img: 'https://images.unsplash.com/photo-1516663827406-84c438ccb46b?auto=format&fit=crop&q=80&w=600' },
+  { name: '惊蛰', en: 'Awakening of Insects', desc: '桃始华，仓庚鸣。', color: 'bg-pink-50 text-pink-900', img: 'https://images.unsplash.com/photo-1523975618106-28a9b92324f6?auto=format&fit=crop&q=80&w=600' },
+  { name: '白露', en: 'White Dew', desc: '鸿雁来，玄鸟归。', color: 'bg-slate-100 text-slate-800', img: 'https://images.unsplash.com/photo-1465433849244-4296a022bb45?auto=format&fit=crop&q=80&w=600' },
+];
+
+// 模拟数据：诗词库
+const poems = [
+  { title: '望庐山瀑布', author: '李白', content: ['日照香炉生紫烟', '遥看瀑布挂前川', '飞流直下三千尺', '疑是银河落九天'] },
+  { title: '江雪', author: '柳宗元', content: ['千山鸟飞绝', '万径人踪灭', '孤舟蓑笠翁', '独钓寒江雪'] },
+  { title: '春晓', author: '孟浩然', content: ['春眠不觉晓', '处处闻啼鸟', '夜来风雨声', '花落知多少'] },
+  { title: '登鹳雀楼', author: '王之涣', content: ['白日依山尽', '黄河入海流', '欲穷千里目', '更上一层楼'] },
+];
+
+const App = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [currentPoemIndex, setCurrentPoemIndex] = useState(0);
+  const [fadePoem, setFadePoem] = useState(false);
+
+  // 滚动监听，用于导航栏效果
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 切换诗词
+  const handleNextPoem = () => {
+    setFadePoem(true);
+    setTimeout(() => {
+      setCurrentPoemIndex((prev) => (prev + 1) % poems.length);
+      setFadePoem(false);
+    }, 500);
+  };
+
+  return (
+    <div className="min-h-screen bg-[#fcf9f2] text-[#2c2c2c] font-serif overflow-x-hidden selection:bg-[#b93a32] selection:text-white">
+      {/* --- 全局背景纹理 (纸张质感) --- */}
+      <div className="fixed inset-0 pointer-events-none opacity-40 z-0" 
+           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E")` }}>
+      </div>
+
+      {/* --- 导航栏 --- */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-500 ease-in-out px-6 py-4 flex justify-between items-center ${isScrolled ? 'bg-[#fcf9f2]/90 backdrop-blur-md shadow-sm border-b border-stone-200' : 'bg-transparent'}`}>
+        <div className="flex items-center gap-3">
+          {/* 印章Logo */}
+          <div className="w-10 h-10 bg-[#b93a32] rounded-sm flex items-center justify-center shadow-inner">
+            <span className="text-white font-bold text-xl writing-vertical-rl select-none font-mono">墨韵</span>
+          </div>
+          <span className={`text-xl tracking-widest font-bold hidden md:block transition-colors ${isScrolled ? 'text-stone-800' : 'text-stone-900'}`}>
+            INK & RHYME
+          </span>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        {/* 桌面菜单 */}
+        <div className="hidden md:flex gap-8 text-sm tracking-widest">
+          {['山水', '节气', '诗文', '关于'].map((item) => (
+            <a key={item} href={`#${item}`} className="relative group hover:text-[#b93a32] transition-colors duration-300 cursor-pointer">
+              {item}
+              <span className="absolute -bottom-1 left-1/2 w-0 h-[1px] bg-[#b93a32] transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+            </a>
+          ))}
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        {/* 移动端菜单按钮 */}
+        <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="md:hidden text-stone-800">
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
+      {/* 移动端菜单覆盖层 */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#fcf9f2] flex flex-col items-center justify-center gap-8 text-xl tracking-widest animate-in fade-in slide-in-from-top-10 duration-300">
+           {['山水', '节气', '诗文', '关于'].map((item) => (
+            <a key={item} href={`#${item}`} onClick={() => setMobileMenuOpen(false)} className="hover:text-[#b93a32]">
+              {item}
+            </a>
+          ))}
         </div>
-    </section>
+      )}
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+      {/* --- Hero Section (山水) --- */}
+      <section id="山水" className="relative min-h-screen flex flex-col items-center justify-center pt-20 overflow-hidden">
+        {/* 背景水墨山水图 (Unsplash) */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1464660756002-dd999600b18d?q=80&w=2000&auto=format&fit=crop" 
+            alt="Chinese Landscape" 
+            className="w-full h-full object-cover opacity-20 grayscale contrast-125 scale-105 animate-pulse-slow" 
+            style={{ animationDuration: '20s' }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#fcf9f2] via-transparent to-[#fcf9f2]"></div>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
+        {/* 主标题区域 */}
+        <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8 md:gap-16 p-8">
+          {/* 竖排大标题 */}
+          <div className="flex flex-row-reverse gap-4 md:gap-8">
+            <h1 className="writing-vertical-rl text-6xl md:text-8xl font-bold tracking-widest text-stone-800 drop-shadow-sm font-[SimSun,serif]">
+              山水之间
+            </h1>
+            <h2 className="writing-vertical-rl text-2xl md:text-3xl text-stone-500 tracking-wider pt-12 font-light italic">
+              观万物而自得
+            </h2>
+          </div>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
+          {/* 圆形装饰与文字 */}
+          <div className="mt-12 md:mt-0 flex flex-col items-center md:items-start max-w-md space-y-6">
+            <div className="w-64 h-64 rounded-full border border-stone-300 overflow-hidden relative shadow-2xl">
+              <img 
+                src="https://images.unsplash.com/photo-1526335727645-74a18e4e16ec?auto=format&fit=crop&q=80&w=800" 
+                className="w-full h-full object-cover hover:scale-110 transition-transform duration-1000 ease-out"
+                alt="Bamboo"
+              />
+              <div className="absolute inset-0 bg-[#b93a32]/10 pointer-events-none"></div>
             </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+            <p className="text-stone-600 leading-loose text-center md:text-left tracking-wide">
+              中国美学不仅仅是视觉的享受，更是一种哲学。是“留白”的智慧，是“天人合一”的境界。在这里，我们重拾笔墨，寻觅那份久违的宁静。
+            </p>
+            <button className="group flex items-center gap-2 px-6 py-2 border border-stone-800 rounded-full hover:bg-stone-800 hover:text-[#fcf9f2] transition-all duration-300">
+              <span>开启旅程</span>
+              <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </button>
+          </div>
         </div>
-    </footer>
+        
+        {/* 滚动提示 */}
+        <div className="absolute bottom-10 animate-bounce text-stone-400">
+           <div className="w-[1px] h-16 bg-stone-300 mx-auto mb-2"></div>
+           <span className="text-xs tracking-widest writing-vertical-rl">滑动探索</span>
+        </div>
+      </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+      {/* --- 节气 Section --- */}
+      <section id="节气" className="py-24 px-6 md:px-20 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-stone-200 pb-6">
+            <div>
+              <span className="text-[#b93a32] text-sm tracking-[0.3em] uppercase font-bold block mb-2">Solar Terms</span>
+              <h2 className="text-4xl md:text-5xl font-bold text-stone-800 font-[SimSun,serif]">四时之序</h2>
+            </div>
+            <p className="text-stone-500 mt-4 md:mt-0 text-right md:text-left max-w-xs text-sm leading-relaxed">
+              春生、夏长、秋收、冬藏。<br/>记录自然流转的细微之美。
+            </p>
+          </div>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {solarTerms.map((term, idx) => (
+              <div key={term.name} className="group relative bg-white p-4 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer overflow-hidden border border-stone-100">
+                <div className="h-48 overflow-hidden mb-4 relative">
+                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors z-10"></div>
+                  <img src={term.img} alt={term.name} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" />
+                  {/* 节气印章 */}
+                  <div className="absolute top-2 right-2 z-20 w-8 h-8 border border-white/50 flex items-center justify-center text-white text-xs font-serif rounded-full backdrop-blur-sm">
+                    {idx + 1}
+                  </div>
+                </div>
+                <div className="flex flex-col items-center text-center relative z-20">
+                  <h3 className="text-2xl font-bold text-stone-800 mb-1">{term.name}</h3>
+                  <p className="text-xs text-stone-400 uppercase tracking-widest mb-3">{term.en}</p>
+                  <div className="w-8 h-[1px] bg-[#b93a32] mb-3"></div>
+                  <p className="text-stone-600 text-sm font-serif italic opacity-80 group-hover:opacity-100 transition-opacity">
+                    {term.desc}
+                  </p>
+                </div>
+                {/* 装饰边角 */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-[#b93a32] transform -translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* --- 诗文 Section (交互区域) --- */}
+      <section id="诗文" className="py-24 bg-stone-100 relative overflow-hidden">
+        {/* 装饰背景字 */}
+        <div className="absolute top-10 right-10 text-9xl opacity-5 pointer-events-none font-[SimSun,serif] select-none">
+          诗
+        </div>
+        <div className="absolute bottom-10 left-10 text-9xl opacity-5 pointer-events-none font-[SimSun,serif] select-none">
+          韵
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-800 mb-4">每日一吟</h2>
+            <p className="text-stone-500">点击印章，换一首心境。</p>
+          </div>
+
+          {/* 诗词卡片 */}
+          <div className="bg-white/80 backdrop-blur-sm p-8 md:p-16 shadow-2xl border border-stone-200 relative min-h-[400px] flex flex-col items-center justify-center">
+            {/* 边框纹理 */}
+            <div className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-[#b93a32] opacity-50"></div>
+            <div className="absolute bottom-4 right-4 w-16 h-16 border-b-2 border-r-2 border-[#b93a32] opacity-50"></div>
+
+            <div className={`transition-opacity duration-500 flex flex-col items-center ${fadePoem ? 'opacity-0' : 'opacity-100'}`}>
+              <h3 className="text-4xl font-bold mb-2 text-stone-900 tracking-widest font-[SimSun,serif]">
+                {poems[currentPoemIndex].title}
+              </h3>
+              <p className="text-[#b93a32] mb-8 text-sm tracking-widest border px-2 py-0.5 rounded-full border-[#b93a32]/30">
+                [{poems[currentPoemIndex].author}]
+              </p>
+              
+              {/* 诗词内容：桌面端竖排，移动端横排 */}
+              <div className="flex flex-col md:flex-row-reverse gap-4 md:gap-12 text-lg md:text-2xl leading-loose text-stone-700 font-medium">
+                 {poems[currentPoemIndex].content.map((line, idx) => (
+                   <div key={idx} className="md:writing-vertical-rl tracking-widest border-r border-transparent md:border-stone-200 md:pr-8 md:last:border-none">
+                     {line}
+                   </div>
+                 ))}
+              </div>
+            </div>
+
+            {/* 交互印章按钮 */}
+            <button 
+              onClick={handleNextPoem}
+              className="mt-12 w-16 h-16 rounded bg-[#b93a32] hover:bg-[#a02e26] text-white shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center active:scale-95"
+              title="换一首"
+            >
+              <span className="writing-vertical-rl font-bold text-lg">下一首</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* --- 关于/页脚 Section --- */}
+      <section id="关于" className="bg-[#2c2c2c] text-[#999] py-20 px-6">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12">
+          
+          {/* Brand */}
+          <div className="flex flex-col items-start">
+            <div className="w-12 h-12 bg-[#fcf9f2] rounded-sm flex items-center justify-center mb-6">
+              <span className="text-[#2c2c2c] font-bold text-2xl font-mono">墨</span>
+            </div>
+            <p className="text-sm leading-relaxed max-w-xs">
+              致力于以现代Web技术重构东方美学。在代码的逻辑与水墨的写意之间，寻找数字时代的诗意栖居。
+            </p>
+          </div>
+
+          {/* Links */}
+          <div className="flex gap-12 md:justify-center">
+            <ul className="space-y-4">
+              <li className="text-white font-bold mb-2">探索</li>
+              <li><a href="#山水" className="hover:text-white transition-colors">山水画卷</a></li>
+              <li><a href="#节气" className="hover:text-white transition-colors">四时节气</a></li>
+              <li><a href="#诗文" className="hover:text-white transition-colors">诗词歌赋</a></li>
+            </ul>
+            <ul className="space-y-4">
+              <li className="text-white font-bold mb-2">联络</li>
+              <li className="hover:text-white cursor-pointer">书信往来</li>
+              <li className="hover:text-white cursor-pointer">合作洽谈</li>
+              <li className="hover:text-white cursor-pointer">加入我们</li>
+            </ul>
+          </div>
+
+          {/* Newsletter / Quote */}
+          <div className="flex flex-col justify-between md:items-end">
+            <blockquote className="text-right italic font-serif text-lg text-stone-400 mb-6">
+              "美不自美，因人而彰。"
+            </blockquote>
+            <div className="flex flex-col items-end gap-2">
+              <p className="text-xs text-stone-600">Designed for the serene soul.</p>
+              <p className="text-xs text-stone-600">© 2025 Ink & Rhyme. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 样式增强：自定义滚动条等 */}
+      <style>{`
+        .writing-vertical-rl {
+          writing-mode: vertical-rl;
         }
+        ::selection {
+          background-color: #b93a32;
+          color: #ffffff;
+        }
+        /* 隐藏滚动条但在视觉上保持滚动功能 (可选) */
+        ::-webkit-scrollbar {
+          width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #fcf9f2; 
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #d6d3cb; 
+          border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #b93a32; 
+        }
+      `}</style>
+    </div>
+  );
+};
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
-</body>
-
-</html>
+export default App;
